@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Image to Text</title>
+    <title>Image to Text OCR Converter</title>
     <link rel="stylesheet" href="static/style.css">
 </head>
 
@@ -12,14 +12,18 @@
 
         <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
             <label class="drop" id="drop-area">
-                <input type="file" id="fileElem" name="image" />
+                <input type="file" id="fileElem" name="image" accept="image/*" />
                 <div>
                     <h3>📄 Drop your image here or click to upload</h3>
                 </div>
             </label>
 
-            <div style="position: relative; display: inline-block;">
-                <button id="convertBtn" class="btn1" type="submit" disabled>Convert</button>
+            <div id="image-preview-container" class="image-preview" style="display:none;">
+                <img id="image-preview" src="#" alt="Image Preview" />
+            </div>
+
+            <div style="position: relative; display: inline-block; width: 100%; margin-top: 1rem;">
+                <button id="convertBtn" class="btn1" type="submit" disabled>Convert Image</button>
                 <div id="notification" class="notification"></div>
             </div>
 
@@ -28,17 +32,12 @@
             </div>
         </form>
 
-        {% if text %}
-        <h2>Extracted Text:</h2>
-        <pre>{{ text }}</pre>
-        {% endif %}
-
         <section id="result" class="result" style="display:none;">
-            <h2>Extracted text</h2>
+            <h2>Extracted Text</h2>
             <textarea id="extractedText" readonly></textarea>
             <div class="result-actions">
-                <button id="copyBtn" type="button">Copy</button>
-                <button id="clearBtn" type="button">Clear</button>
+                <button id="copyBtn" type="button">Copy Text</button>
+                <button id="clearBtn" type="button">Clear All</button>
             </div>
         </section>
 
