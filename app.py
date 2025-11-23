@@ -5,6 +5,8 @@ import os
 from werkzeug.utils import secure_filename
 import tempfile # NEW: Import tempfile
 
+pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
+
 app = Flask(__name__)
 
 # NOTE: UPLOAD_FOLDER configuration is no longer strictly necessary for temporary files, 
